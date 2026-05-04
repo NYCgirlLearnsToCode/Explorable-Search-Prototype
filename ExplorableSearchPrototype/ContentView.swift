@@ -24,7 +24,10 @@ struct ContentView: View {
 
                     overviewSection
 
-                    carouselSection
+                    if overviewExpanded {
+                        carouselSection
+                            .transition(.opacity)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 20)
@@ -63,10 +66,11 @@ struct ContentView: View {
                 .font(.body)
                 .foregroundStyle(.primary)
                 .padding(.top, 8)
-                .animation(.easeInOut(duration: 0.2), value: overviewExpanded)
 
             Button {
-                overviewExpanded.toggle()
+                withAnimation(.easeInOut(duration: 0.28)) {
+                    overviewExpanded.toggle()
+                }
             } label: {
                 Text(overviewExpanded ? "Show less" : "Show more")
                     .font(.subheadline.weight(.semibold))
