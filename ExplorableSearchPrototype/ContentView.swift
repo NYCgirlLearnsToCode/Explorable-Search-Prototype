@@ -8,14 +8,14 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var overviewExpanded = false
-    @State private var places = MockData.places
+    @State private var sections = MockData.sections
 
     private static let carouselCardHeight: CGFloat = 240
     private static let carouselCardSpacing: CGFloat = 14
 
     var body: some View {
         ZStack(alignment: .top) {
-            Color(.systemGroupedBackground)
+            Color(.systemBackground)
                 .ignoresSafeArea()
 
             ScrollView(.vertical, showsIndicators: true) {
@@ -25,8 +25,8 @@ struct ContentView: View {
                     overviewSection
 
                     if overviewExpanded {
-                        carouselSection
-                            .transition(.opacity)
+                        carouselsSection
+                            .transition(.opacity .combined(with: .slide))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +62,7 @@ struct ContentView: View {
                 .foregroundStyle(.secondary)
                 .padding(.top, 24)
 
-            Text(overviewExpanded ? MockData.overviewFull : MockData.overviewShort)
+            Text(MockData.overviewShort)
                 .font(.body)
                 .foregroundStyle(.primary)
                 .padding(.top, 8)
@@ -82,20 +82,28 @@ struct ContentView: View {
         }
     }
 
-    private var carouselSection: some View {
+    private var carouselsSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            ForEach(Array(sections.indices), id: \.self) { sectionIndex in
+                sectionCarousel(sectionIndex: sectionIndex)
+            }
+        }
+    }
+
+    private func sectionCarousel(sectionIndex: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Iconic Landmarks")
+            Text(sections[sectionIndex].title)
                 .font(.title3.weight(.semibold))
-                .padding(.top, 28)
+                .padding(.top, sectionIndex == 0 ? 28 : 0)
 
             GeometryReader { proxy in
                 let cardWidth = carouselCardWidth(totalWidth: proxy.size.width)
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: Self.carouselCardSpacing) {
-                        ForEach(Array(places.indices), id: \.self) { index in
+                        ForEach(Array(sections[sectionIndex].places.indices), id: \.self) { placeIndex in
                             PlaceCardView(
-                                place: $places[index],
+                                place: $sections[sectionIndex].places[placeIndex],
                                 width: cardWidth,
                                 height: Self.carouselCardHeight
                             )

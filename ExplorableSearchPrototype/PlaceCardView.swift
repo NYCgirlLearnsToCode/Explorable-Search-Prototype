@@ -84,7 +84,7 @@ struct PlaceCardView: View {
 
 #Preview {
     struct PlaceCardPreview: View {
-        @State private var place = MockData.places[0]
+        @State private var place = MockData.sections[0].places[0]
         var body: some View {
             PlaceCardView(place: $place, width: 160, height: 240)
         }
