@@ -2,7 +2,8 @@
 > What if AI search results weren’t something you read—but something you explore?
 
 
-##Demo
+## Demo
+https://github.com/user-attachments/assets/e9347028-7bbd-4e08-a55b-1a57ed102a27
 
 ## Overview
 
