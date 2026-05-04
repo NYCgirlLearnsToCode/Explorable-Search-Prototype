@@ -21,7 +21,7 @@ enum MockData {
             title: "Statue of Liberty",
             description: "An iconic neoclassical symbol of freedom in New York Harbor.",
             imageName: "ferry.fill",
-            isSaved: true
+            isSaved: false
         ),
         Place(
             id: UUID(),

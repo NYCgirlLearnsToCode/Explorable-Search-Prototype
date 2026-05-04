@@ -8,13 +8,14 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var overviewExpanded = false
+    @State private var places = MockData.places
 
     private static let carouselCardHeight: CGFloat = 240
     private static let carouselCardSpacing: CGFloat = 14
 
     var body: some View {
         ZStack(alignment: .top) {
-            Color(uiColor: .systemGroupedBackground)
+            Color(.systemGroupedBackground)
                 .ignoresSafeArea()
 
             ScrollView(.vertical, showsIndicators: true) {
@@ -47,7 +48,7 @@ struct ContentView: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
         .frame(minHeight: 48)
-        .background(Color(uiColor: .secondarySystemGroupedBackground))
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
@@ -87,10 +88,10 @@ struct ContentView: View {
                 let cardWidth = carouselCardWidth(totalWidth: proxy.size.width)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: Self.carouselCardSpacing) {
-                        ForEach(MockData.places) { place in
+                    HStack(spacing: Self.carouselCardSpacing) {
+                        ForEach(Array(places.indices), id: \.self) { index in
                             PlaceCardView(
-                                place: place,
+                                place: $places[index],
                                 width: cardWidth,
                                 height: Self.carouselCardHeight
                             )
