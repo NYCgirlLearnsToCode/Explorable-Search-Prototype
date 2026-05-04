@@ -4,6 +4,11 @@
 
 ## Demo
 https://github.com/user-attachments/assets/e9347028-7bbd-4e08-a55b-1a57ed102a27
+**Key interactions shown:**
+- Expand AI overview into structured sections  
+- Browse via horizontal carousels  
+- Save items to a shortlist  
+- Review selections in a bottom sheet
 
 ## Overview
 
