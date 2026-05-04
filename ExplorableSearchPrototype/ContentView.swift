@@ -60,7 +60,7 @@ struct ContentView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
 
-            Text("Search landmarks, cities, or topics")
+            Text("Things to do nyc")
                 .foregroundStyle(.secondary)
                 .font(.body)
 
