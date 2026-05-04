@@ -4,13 +4,13 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct ContentView: View {
 
     @State private var overviewExpanded = false
 
     private static let carouselCardHeight: CGFloat = 240
+    private static let carouselCardSpacing: CGFloat = 14
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -87,9 +87,13 @@ struct ContentView: View {
                 let cardWidth = carouselCardWidth(totalWidth: proxy.size.width)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 14) {
-                        ForEach(MockData.landmarks) { landmark in
-                            LandmarkCarouselCard(landmark: landmark, width: cardWidth)
+                    LazyHStack(spacing: Self.carouselCardSpacing) {
+                        ForEach(MockData.places) { place in
+                            PlaceCardView(
+                                place: place,
+                                width: cardWidth,
+                                height: Self.carouselCardHeight
+                            )
                         }
                     }
                     .padding(.vertical, 2)
@@ -101,44 +105,10 @@ struct ContentView: View {
     }
 
     private func carouselCardWidth(totalWidth: CGFloat) -> CGFloat {
-        let usable = max(totalWidth, 240)
-        return max(240, min(usable * 0.72, 300))
-    }
-}
-
-private struct LandmarkCarouselCard: View {
-    let landmark: Landmark
-    let width: CGFloat
-
-    private var iconHeight: CGFloat {
-        width * 0.58
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Image(systemName: landmark.symbolName)
-                .font(.system(size: 36, weight: .medium))
-                .foregroundStyle(.white.opacity(0.92))
-                .frame(maxWidth: .infinity)
-                .frame(height: iconHeight)
-                .background(landmark.symbolColor)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(landmark.name)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
-                    .lineLimit(2)
-
-                Text(landmark.subtitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
-            }
-            .padding(14)
-        }
-        .frame(width: width, alignment: .leading)
-        .background(Color(uiColor: .secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        let cardsVisible: CGFloat = 2.5
+        let usable = max(totalWidth, 280)
+        let spacingBudget = Self.carouselCardSpacing * (cardsVisible - 1)
+        return (usable - spacingBudget) / cardsVisible
     }
 }
 

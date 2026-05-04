@@ -3,24 +3,75 @@
 //  ExplorableSearchPrototype
 //
 
-import SwiftUI
+import Foundation
 
-struct Landmark: Identifiable {
-    let id: String
-    let name: String
-    let subtitle: String
-    let symbolName: String
-    let symbolColor: Color
+struct Place: Identifiable {
+    let id: UUID
+    let title: String
+    let description: String
+    let imageName: String
+    var isSaved: Bool
 }
 
 enum MockData {
 
-    static let landmarks: [Landmark] = [
-        Landmark(id: "eiffel", name: "Eiffel Tower", subtitle: "Paris, France", symbolName: "building.columns.fill", symbolColor: .indigo),
-        Landmark(id: "liberty", name: "Statue of Liberty", subtitle: "New York, USA", symbolName: "flame.fill", symbolColor: .teal),
-        Landmark(id: "wall", name: "Great Wall", subtitle: "China", symbolName: "mountain.2.fill", symbolColor: .brown),
-        Landmark(id: "taj", name: "Taj Mahal", subtitle: "Agra, India", symbolName: "sun.max.fill", symbolColor: .orange),
-        Landmark(id: "colosseum", name: "Colosseum", subtitle: "Rome, Italy", symbolName: "theatermasks.fill", symbolColor: .red),
+    static let places: [Place] = [
+        Place(
+            id: UUID(),
+            title: "Statue of Liberty",
+            description: "An iconic neoclassical symbol of freedom in New York Harbor.",
+            imageName: "ferry.fill",
+            isSaved: true
+        ),
+        Place(
+            id: UUID(),
+            title: "Central Park",
+            description: "An urban oasis with meadows, lakes, and winding scenic paths.",
+            imageName: "leaf.fill",
+            isSaved: false
+        ),
+        Place(
+            id: UUID(),
+            title: "Empire State Building",
+            description: "A legendary Art Deco skyscraper with panoramic city views.",
+            imageName: "building.2.fill",
+            isSaved: false
+        ),
+        Place(
+            id: UUID(),
+            title: "Brooklyn Bridge",
+            description: "Historic suspension bridge connecting Manhattan and Brooklyn.",
+            imageName: "cable.connector",
+            isSaved: true
+        ),
+        Place(
+            id: UUID(),
+            title: "Times Square",
+            description: "Bright lights, giant screens, and nonstop Midtown energy.",
+            imageName: "sparkles.rectangle.stack.fill",
+            isSaved: false
+        ),
+        Place(
+            id: UUID(),
+            title: "Grand Central Terminal",
+            description: "A Beaux-Arts landmark known for its celestial ceiling.",
+            imageName: "tram.fill",
+            isSaved: false
+        ),
+        Place(
+            id: UUID(),
+            title: "Rockefeller Center",
+            description: "Famous for Top of the Rock, holiday tree, and city art deco.",
+            imageName: "building.columns.fill",
+            isSaved: false
+        ),
+        Place(
+            id: UUID(),
+            title: "One World Observatory",
+            description: "Sky-high observation decks with sweeping skyline perspectives.",
+            imageName: "viewfinder.circle.fill",
+            isSaved: true
+        ),
     ]
 
     static let overviewTitle = "AI Overview"
