@@ -75,7 +75,7 @@ struct PlaceCardView: View {
     }
 
     private var placeImage: Image {
-        Image(systemName: place.imageName)
+        Image(place.imageName)
     }
 }
 
